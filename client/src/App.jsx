@@ -1,6 +1,5 @@
 import { Navbar, Footer, Sidebar, Result } from "./components";
-import { Admin, OpenTender, SelectiveTender, OpenBidPage , SelectiveBidPage} from "./pages"
-import Home from "./pages/Home";
+import { Admin, Home, OpenTender, SelectiveTender, OpenBidPage , SelectiveBidPage} from "./pages"
 // import background from "./assets/background.avif";
 import { BrowserRouter, Route, Routes } from"react-router-dom";
 
@@ -23,7 +22,7 @@ const App= () => {
             <Route path='/' element={<Home/>}/>
             <Route path='openTender' element={<OpenTender/>}/>
             <Route path='/selectiveTender' element={<SelectiveTender/>}/>
-            {/* <Route path='/admin' element={<Admin/>}/> */}
+            <Route path='/admin' element={<Admin/>}/>
             <Route path='/result' element={<Result/>}/>
             <Route path='/openBidPage' element={<OpenBidPage/>}/>
             <Route path='/selectiveBidPage' element={<SelectiveBidPage/>}/>
