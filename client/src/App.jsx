@@ -6,6 +6,8 @@ import { BrowserRouter, Route, Routes } from"react-router-dom";
 const App= () => {
 
   return (
+    <BrowserRouter>
+
     <div className="flex flex-col h-screen bg-white bg-opacity-5 " style={{ backgroundImage: `url("https://images.unsplash.com/photo-1639322537228-f710d846310a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80")` }}>
       
       <div>
@@ -17,7 +19,6 @@ const App= () => {
           <Sidebar />
         </div>
         <div className="w-full h-full">
-          <BrowserRouter>
           <Routes>
             <Route path='/' element={<Home/>}/>
             <Route path='openTender' element={<OpenTender/>}/>
@@ -27,7 +28,6 @@ const App= () => {
             <Route path='/openBidPage' element={<OpenBidPage/>}/>
             <Route path='/selectiveBidPage' element={<SelectiveBidPage/>}/>
           </Routes>
-          </BrowserRouter>
         </div>
       </div>
 
@@ -36,6 +36,8 @@ const App= () => {
       </div>
 
     </div>
+    </BrowserRouter>
+
   )
 }
 

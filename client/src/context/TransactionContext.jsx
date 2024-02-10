@@ -3,6 +3,7 @@ import {
     useAddress,
     useContract,
     useContractWrite,
+    useConnect,
     useMetamask
 } from "@thirdweb-dev/react";
 import { ethers } from "ethers";
@@ -18,7 +19,12 @@ export const TransactionProvider =({ children })=> {
     const {selectiveContract}=useContract("0xb597740409643dAf766d8d22812cE2E6c8063698");
 
     //const address = useAddress();
-    const connectWallet = useMetamask();
+    //const connectWallet = useMetamask();
+    const connectWallet = handleConnect();
+    const connect = useConnect();
+    async function handleConnect() {
+        const wallet = await connect(walletConfig, connectOptions);
+    }
 
     //const [currentAccount, setCurrentAccount] = useState("");
     const [title, setTitle] = useState("");
