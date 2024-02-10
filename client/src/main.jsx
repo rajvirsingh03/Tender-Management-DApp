@@ -2,8 +2,9 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App";
 import { ThirdwebProvider } from "@thirdweb-dev/react";
-import { Mumbai } from "@thirdweb-dev/chains";
+import { Sepolia } from "@thirdweb-dev/chains";
 import "./index.css";
+import { TransactionProvider } from "./context/TransactionContext";
 
 // This is the chain your dApp will work on.
 // Change this to the chain your app is built for.
@@ -16,9 +17,11 @@ root.render(
   <React.StrictMode>
     <ThirdwebProvider
       clientId="a514b51e06ccce41b59d5dc637c7a5b3"
-      activeChain={Mumbai}
+      activeChain={Sepolia}
     >
+    <TransactionProvider>
       <App />
+    </TransactionProvider>
     </ThirdwebProvider>
   </React.StrictMode>
 );

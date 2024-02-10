@@ -41,33 +41,31 @@ const openBidPage = (props)=>{
             </div>
             <div className='row-span-2 col-span-2 grid grid-row-3 p-3 bg-base-300 m-3 rounded-lg'>
                 <div className='text-2xl row-span-1 text-center font-bold '>
-                    {opentdr.tdrTitle.title}
+                <div className="text-left">Title:{opentdr.tdrTitle.title} </div>
+                    
                 </div>
                 <div className='row-span-3'>
+                <div className="text-left">Description: </div>
                     {opentdr.tdrDesc.desc}
-                    {opentdr.tdrDesc.desc}
-
-                    {opentdr.tdrDesc.desc}
-
-                    {opentdr.tdrDesc.desc}
+                   
 
                 </div>
             </div>
             <div className='row-span-2 col-span-1 text-center p-3 bg-base-300 m-3 rounded-lg grid grid-rows-5 '>
                 
                 <div className='text-xl row-start-1 font-bold'>
-                    Highest Bid <br/> {(opentdr.tdrMaxBid.maxBid)/(10**18)} ETH
+                    Highest Bid: <br/> 1.2 ETH
                 </div>
                
-               <div className='row-start-3'>
-                    <input type="text" placeholder='Enter Amount in ETH' className='text-center input input-bordered input-primary w-full max-w-xs m-2' onChange={handleChangeBidAmt} />
+               <div className='row-start-3 text-black'>
+                    <input type="text" placeholder='Enter Amount in ETH' className='text-center input input-bordered input-primary w-full max-w-xs m-2 rounded-md' onChange={handleChangeBidAmt} />
                </div>
-               <div className='row-start-4'>
-                    <input type="text" placeholder='Enter Name' className='text-center input input-bordered input-primary w-full max-w-xs m-2' onChange={handleChangeBidderName} />
+               <div className='row-start-4 text-black'>
+                    <input type="text" placeholder='Enter Name' className='text-center input input-bordered input-primary w-full max-w-xs m-2 rounded-md' onChange={handleChangeBidderName} />
                     
                </div>
                <div className='row-start-5'>
-                    <button className='btn hover:bg-primary w-[200px]' onClick={handlePlaceOpenBid}>
+                    <button className='btn hover:bg-primary w-[200px] p-4 text-black bg-slate-100 rounded-lg' onClick={handlePlaceOpenBid}>
                         Bid
                     </button>
                </div>

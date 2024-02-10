@@ -15,16 +15,16 @@ if(typeof window.ethereum == 'undefined'){
 }
 
 export const TransactionProvider =({ children })=> {
-    const {openContract}=useContract("0xBFb8eE74DD7E796b1C52A6d95A6B9C6DF1285263");
-    const {selectiveContract}=useContract("0xb597740409643dAf766d8d22812cE2E6c8063698");
+    const {contract}=useContract("0x3f6CF4812cc192De0d0491145797C775dBEBc083");
+    const {selectiveContract}=useContract("0xA59af8E1C8ba3e83Fc27278712F62F7fDf6885e3");
 
     //const address = useAddress();
     //const connectWallet = useMetamask();
-    const connectWallet = handleConnect();
-    const connect = useConnect();
-    async function handleConnect() {
-        const wallet = await connect(walletConfig, connectOptions);
-    }
+    // const connectWallet = handleConnect();
+    // const connect = useConnect();
+    // async function handleConnect() {
+    //     const wallet = await connect(walletConfig, connectOptions);
+    // }
 
     const [currentAccount, setCurrentAccount] = useState("");
     const [title, setTitle] = useState("");
@@ -74,6 +74,7 @@ export const TransactionProvider =({ children })=> {
     }
 
     const handleChangeBidAmt = (e) => {
+        console.log("bidAmt: ",e.target.value);
         setBidAmt(e.target.value);
         console.log(bidAmt);
     }
@@ -84,7 +85,7 @@ export const TransactionProvider =({ children })=> {
     }
 
     const { mutateAsync: createTenderOpen } = useContractWrite(
-        openContract,
+        contract,
         "createTender"
     );
     const { mutateAsync: createTenderSelective } = useContractWrite(
@@ -92,7 +93,7 @@ export const TransactionProvider =({ children })=> {
         "createTender"
     );
     const {mutateAsync: bidOpen} = useContractWrite(
-        openContract,
+        contract,
         "bid"
     )
     const {mutateAsync: bidSelective} = useContractWrite(
@@ -121,10 +122,10 @@ export const TransactionProvider =({ children })=> {
     }
 
     const loadOpenTdrs = async()=>{
-        const tdrCount = await openContract.call("getTdrCount");
+        const tdrCount = await contract.call("getTdrCount");
         if(tdrCount>0){
             for(var i=0; i<tdrCount; i++){
-                const tdrInfo = await openContract.call("getTdrInfo", [i]);
+                const tdrInfo = await contract.call("getTdrInfo", [i]);
                 const id = tdrInfo.id.toString();
                 const title = tdrInfo.title;
                 const desc = tdrInfo.desc;
@@ -179,7 +180,7 @@ export const TransactionProvider =({ children })=> {
     const placeOpenBid = async()=>{
         try{
             const transact = await bidOpen({
-                args:[tdrID, bidderName, bidAmt], value: ethers.utils.parseEther(bidAmt.toString())});
+                args:[tdrID, bidderName], value: ethers.utils.parseEther(bidAmt.toString())});
             console.log(transact);
         } catch(error){
             console.log(error);
@@ -201,9 +202,9 @@ export const TransactionProvider =({ children })=> {
     const getPrevOpenBids = async()=>{
         try{
             if(tdrID){
-                const count = await openContract.call("getBidderCountofTdr", [tdrID]);
+                const count = await contract.call("getBidderCountofTdr", [tdrID]);
                 for(var i=0;i<count;i++){
-                    const bid = await openContract.call("getBiddersofTdr", [tdrID, i]);
+                    const bid = await contract.call("getBiddersofTdr", [tdrID, i]);
                     const bidder = bid.bidder.toString();
                     const bidderAmt= bid.bidAmt.toString();
                     bidsArray[i]={
@@ -241,7 +242,7 @@ export const TransactionProvider =({ children })=> {
     }
 
     return(
-        <TransactionContext.Provider value={{connectWallet, currentAccount, handleChangeTitle, handleChangeDesc, handleChangeStartTime, handleChangeEndTime, selectOpenTender, selectSelectiveTender, createTender, loadOpenTdrs, loadSelectiveTdrs, handleChangeBidAmt, handleChangeBidderName, placeOpenBid, openTdrs, selectiveTdrs,setTdrID, tdrID, getPrevOpenBids, OpenBids, placeSelectiveBid, SelectiveBids, getPrevSelectiveBids}}>
+        <TransactionContext.Provider value={{currentAccount, handleChangeTitle, handleChangeDesc, handleChangeStartTime, handleChangeEndTime, selectOpenTender, selectSelectiveTender, createTender, loadOpenTdrs, loadSelectiveTdrs, handleChangeBidAmt, handleChangeBidderName, placeOpenBid, openTdrs, selectiveTdrs,setTdrID, tdrID, getPrevOpenBids, OpenBids, placeSelectiveBid, SelectiveBids, getPrevSelectiveBids}}>
             {children}
         </TransactionContext.Provider>
     )

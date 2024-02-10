@@ -18,11 +18,11 @@ const App= () => {
         <div className="w-max">
           <Sidebar />
         </div>
-        <div className="w-full h-full">
+        <div className="w-full h-full text-white">
           <Routes>
             <Route path='/' element={<Home/>}/>
             <Route path='openTender' element={<OpenTender/>}/>
-            <Route path='/selectiveTender' element={<SelectiveTender/>}/>
+            {/* <Route path='/selectiveTender' element={<SelectiveTender/>}/> */}
             <Route path='/admin' element={<Admin/>}/>
             <Route path='/result' element={<Result/>}/>
             <Route path='/openBidPage' element={<OpenBidPage/>}/>
