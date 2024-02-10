@@ -26,7 +26,7 @@ export const TransactionProvider =({ children })=> {
         const wallet = await connect(walletConfig, connectOptions);
     }
 
-    //const [currentAccount, setCurrentAccount] = useState("");
+    const [currentAccount, setCurrentAccount] = useState("");
     const [title, setTitle] = useState("");
     const [desc, setDesc] = useState("");
     const [startTime, setStartTime] = useState("");
