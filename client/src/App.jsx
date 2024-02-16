@@ -1,94 +1,44 @@
-import { ConnectWallet } from "@thirdweb-dev/react";
-import "./styles/Home.css";
+import { Navbar, Footer, Sidebar, Result } from "./components";
+import { Admin, Home, OpenTender, SelectiveTender, OpenBidPage , SelectiveBidPage} from "./pages"
+// import background from "./assets/background.avif";
+import { BrowserRouter, Route, Routes } from"react-router-dom";
 
-export default function Home() {
+const App= () => {
+
   return (
-    <main className="main">
-      <div className="container">
-        <div className="header">
-          <h1 className="title">
-            Welcome to{" "}
-            <span className="gradient-text-0">
-              <a
-                href="https://thirdweb.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                thirdweb.
-              </a>
-            </span>
-          </h1>
+    <BrowserRouter>
 
-          <p className="description">
-            Get started by configuring your desired network in{" "}
-            <code className="code">src/index.js</code>, then modify the{" "}
-            <code className="code">src/App.js</code> file!
-          </p>
+    <div className="flex flex-col h-screen bg-white bg-opacity-5 " style={{ backgroundImage: `url("https://images.unsplash.com/photo-1639322537228-f710d846310a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80")` }}>
+      
+      <div>
+        <Navbar />
+      </div>
 
-          <div className="connect">
-            <ConnectWallet />
-          </div>
+      <div className="flex flex-row h-full m-2 overflow-hidden">
+        <div className="w-max">
+          <Sidebar />
         </div>
-
-        <div className="grid">
-          <a
-            href="https://portal.thirdweb.com/"
-            className="card"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              src="/images/portal-preview.png"
-              alt="Placeholder preview of starter"
-            />
-            <div className="card-text">
-              <h2 className="gradient-text-1">Portal ➜</h2>
-              <p>
-                Guides, references, and resources that will help you build with
-                thirdweb.
-              </p>
-            </div>
-          </a>
-
-          <a
-            href="https://thirdweb.com/dashboard"
-            className="card"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              src="/images/dashboard-preview.png"
-              alt="Placeholder preview of starter"
-            />
-            <div className="card-text">
-              <h2 className="gradient-text-2">Dashboard ➜</h2>
-              <p>
-                Deploy, configure, and manage your smart contracts from the
-                dashboard.
-              </p>
-            </div>
-          </a>
-
-          <a
-            href="https://thirdweb.com/templates"
-            className="card"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              src="/images/templates-preview.png"
-              alt="Placeholder preview of templates"
-            />
-            <div className="card-text">
-              <h2 className="gradient-text-3">Templates ➜</h2>
-              <p>
-                Discover and clone template projects showcasing thirdweb
-                features.
-              </p>
-            </div>
-          </a>
+        <div className="w-full h-full text-white">
+          <Routes>
+            <Route path='/' element={<Home/>}/>
+            <Route path='openTender' element={<OpenTender/>}/>
+            {/* <Route path='/selectiveTender' element={<SelectiveTender/>}/> */}
+            <Route path='/admin' element={<Admin/>}/>
+            <Route path='/result' element={<Result/>}/>
+            <Route path='/openBidPage' element={<OpenBidPage/>}/>
+            <Route path='/selectiveBidPage' element={<SelectiveBidPage/>}/>
+          </Routes>
         </div>
       </div>
-    </main>
-  );
+
+      <div>
+        <Footer />
+      </div>
+
+    </div>
+    </BrowserRouter>
+
+  )
 }
+
+export default App
